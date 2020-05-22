@@ -1,0 +1,54 @@
+<a href="<%= SITE_ROOT %>/new"><img alt="New entry" src="<%= SITE_ROOT %>/assets/img/new_entry.gif" width="130" height="40" border="0"></a><br><br>
+<table bordercolorlight="#FFFFFF" bordercolordark="#000000" width="700" cellspacing="0" cellpadding="0" border="2">
+  <tbody>
+    <tr>
+      <td class="td-head" width="15%" valign="top"><b>Name:</b></td>
+      <td class="td-head" width="40%" valign="top"><b>Comment:</b></td>
+    </tr>
+    <%- entries.each_with_index do |e, i| -%>
+    <%- bgcolor = i.even? ? "ededed" : "dddddd" -%>
+    <tr>
+      <td width="20%" valign="top" bgcolor="<%= bgcolor %>">
+        <div class="text2">
+          <b><%= HTML.escape(e.name) %></b><br>
+          <%- unless e.email_hidden? -%>
+          E-Mail: <a class="entry" href=<%= "mailto:#{e.email}".inspect %>><%= HTML.escape(e.email) %></a><br>
+          <%- end -%>
+          <%- unless e.website.empty? -%>
+          Website: <a class="entry" href=<%= e.website.inspect %> target="_blank"><%= HTML.escape(e.website_name.empty? ? e.website : e.website_name) %></a><br>
+          <%- end -%>
+          <%- unless e.location.empty? -%>
+          Location: <%= HTML.escape(e.location) %><br>
+          <%- end -%>
+          <%- unless e.mastodon.empty? -%>
+          Mastodon: <%= HTML.escape(e.mastodon) %><br>
+          <%- end -%>
+        </div>
+      </td>
+      <td width="40%" valign="top" bgcolor="<%= bgcolor %>">
+        <div class="text1">
+          <img src="<%= SITE_ROOT %>/assets/img/icons/<%= e.icon %>.gif" align="absmiddle"> <b>created on <%= e.created_at.to_s("%Y-%m-%d") %> at <%= e.created_at.to_s("%H:%M") %></b>
+        </div>
+        <hr>
+        <div class="text2">
+          <%= e.formatted_message %>
+        </div>
+      </td>
+    </tr>
+    <%- end -%>
+  </tbody>
+</table>
+<br>
+<%- unless page == 1 -%>
+<a href="<%= SITE_ROOT %>/?page=<%= page - 1 %>">&lt;&lt;</a>
+<%- end -%>
+<%- 1.upto(page_count) do |pg| -%>
+<%- if page == pg -%>
+<b><%= pg %></b>
+<%- else -%>
+<a href="<%= SITE_ROOT %>/?page=<%= pg %>"><%= pg %></a>
+<%- end -%>
+<%- end -%>
+<%- unless page == page_count -%>
+<a href="<%= SITE_ROOT %>/?page=<%= page + 1 %>">&gt;&gt;</a>
+<%- end -%>

@@ -1,0 +1,19 @@
+name: guestbook
+version: 0.1.0
+
+authors:
+  - Georg Gadinger <nilsding@nilsding.org>
+
+targets:
+  guestbook:
+    main: src/guestbook.cr
+
+dependencies:
+  pg:
+    github: will/crystal-pg
+  kemal:
+    github: kemalcr/kemal
+
+crystal: 0.34.0
+
+license: MIT

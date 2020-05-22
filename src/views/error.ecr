@@ -1,0 +1,18 @@
+<% tabindex = 0 %><table cellspacing="1" cellpadding="4" border="0">
+  <tbody>
+    <tr>
+      <td class="td-head"><b>Error:</b></td>
+    </tr>
+    <tr>
+      <td bgcolor="#cecece">
+        The following errors prohibited your entry to be saved:
+        <ul>
+        <%- errors.each do |error| -%>
+          <li><%= error %></li>
+        <%- end -%>
+        </ul>
+        Please use your browser's back button to retry again.
+      </td>
+    </tr>
+  </tbody>
+</table>
