@@ -8,11 +8,17 @@ SITE_ROOT = ENV.fetch("SITE_ROOT", "")
 
 Kemal.config.powered_by_header = false
 error 404 do
-  render "src/views/errors/404.ecr"
+  title = "404 - File or directory not found."
+  description = "The resource you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+
+  render "src/views/server_error.ecr"
 end
 if ENV.fetch("KEMAL_ENV", "development") == "production"
   error 500 do
-    render "src/views/errors/500.ecr"
+    title = "500 - Internal server error."
+    description = "There is a problem with the resource you are looking for, and it cannot be displayed."
+
+    render "src/views/server_error.ecr"
   end
 end
 
